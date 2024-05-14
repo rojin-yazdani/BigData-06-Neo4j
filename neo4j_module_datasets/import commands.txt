@@ -1,0 +1,10 @@
+LOAD CSV WITH HEADERS FROM "file:///F:/Projects/Neo4j/test.csv" AS row
+merge(n:MyNode{Name:row.Source})
+merge(m:MyNode{Name:row.Target})
+merge(n)-[:TO{dist:row.distance}]->(m)
+
+
+LOAD CSV WITH HEADERS FROM "file:///gene_gene_associations_50k.csv" AS row
+merge(n:GeneNode{Name:row.OFFICIAL_SYMBOL_A})
+merge(m:GeneNode{Name:row.OFFICIAL_SYMBOL_B})
+merge(n)-[:TO{experimental_system:row.EXPERIMENTAL_SYSTEM}]->(m)
